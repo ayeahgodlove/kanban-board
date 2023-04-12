@@ -2,9 +2,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Action, applyMiddleware, combineReducers } from "redux";
 import thunk, { ThunkAction } from "redux-thunk";
 import { listReducer } from "./list/list.slice";
+import { dragItemReducer } from "./drag/drag-item.slice";
 
 const rootReducer = combineReducers({
-    list: listReducer
+    list: listReducer,
+    dragItem: dragItemReducer
 });
 
 const middlewareEnhancer = applyMiddleware(thunk);
