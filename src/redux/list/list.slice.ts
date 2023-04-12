@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ListState } from "../../models/list.model";
 import { List } from "../../models/list.model";
 import { appState } from "../../models/app-state";
+import { findItemIndexById, moveItem } from "../../utils/array-utility";
 
 export const initialState: ListState = {
   loading: false,
@@ -13,6 +14,12 @@ export const initialState: ListState = {
     text: "",
     tasks: [],
   },
+  draggedId: "",
+  hoverId: "",
+};
+type MoveListProps = {
+  draggedId: string;
+  hoverId: string;
 };
 
 // export const fetchListsAsync = createAsyncThunk(
@@ -58,6 +65,13 @@ export const listSlice = createSlice({
     },
     setActiveList: (state, action: PayloadAction<List>) => {
       state.list = action.payload;
+    },
+    // move list
+    moveList: (state, action: PayloadAction<MoveListProps>) => {
+      const { draggedId, hoverId } = action.payload;
+      const dragIndex = findItemIndexById(state.lists, draggedId);
+      const hoverIndex = findItemIndexById(state.lists, hoverId);
+      state.lists = moveItem(state.lists, dragIndex, hoverIndex);
     },
     fetchTasksSuccess: (state, action: PayloadAction<List[]>) => {
       state.loading = false;

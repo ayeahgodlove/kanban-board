@@ -42,11 +42,14 @@ const useTask = () => {
             ],
           })
         );
+        dispatch({
+          type: "ADD_TASK|CARD_SUCCESS",
+          payload: {
+            id: nanoid(),
+            text: text,
+          },
+        });
       }
-      dispatch({
-        type: "ADD_TASK|CARD_SUCCESS",
-        payload: task,
-      });
     } catch (error: any) {
       dispatch({
         type: "ADD_TASK|CARD_ERROR",

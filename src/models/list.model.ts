@@ -11,6 +11,8 @@ export type ListState = {
     readonly list: List;
     readonly loading: boolean,
     readonly hasErrors: boolean,
-    readonly error: any
+    readonly error: any,
+    readonly draggedId: string;
+    hoverId: string;
 }
 // Task/List === Column/Card
