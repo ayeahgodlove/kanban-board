@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { backgroundColor } from "../../utils/colors";
+import { blue } from "../../../utils/colors";
 
-export const AppContainerStyle = styled.div`
+export const AppContainerLayout = styled.div`
     align-items: flex-start;
-    background-color: ${backgroundColor};
+    background-color: ${blue};
     display: flex;
     flex-direction: row;
     height: 100%;
