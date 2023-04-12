@@ -6,7 +6,7 @@ import { dragItemReducer } from "./drag/drag-item.slice";
 
 const rootReducer = combineReducers({
     list: listReducer,
-    dragItem: dragItemReducer
+    draggedItem: dragItemReducer
 });
 
 const middlewareEnhancer = applyMiddleware(thunk);

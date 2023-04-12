@@ -123,6 +123,7 @@ export const {
   fetchTasksError,
   fetchTasksSuccess,
   setActiveTask,
+  moveList
 } = listSlice.actions;
 export const reducer = listSlice.reducer;
 export { reducer as listReducer };
