@@ -21,6 +21,12 @@ type MoveListProps = {
   draggedId: string;
   hoverId: string;
 };
+type MoveTaskProps = {
+  draggedItemId: string;
+  hoverItemId: string | null;
+  sourceColumnId: string;
+  targetColumnId: string;
+};
 
 // export const fetchListsAsync = createAsyncThunk(
 //   "lists/fetchListsAsync",
@@ -73,6 +79,26 @@ export const listSlice = createSlice({
       const hoverIndex = findItemIndexById(state.lists, hoverId);
       state.lists = moveItem(state.lists, dragIndex, hoverIndex);
     },
+    // move task
+    moveTask: (state, action: PayloadAction<MoveTaskProps>) => {
+      const { draggedItemId, hoverItemId, sourceColumnId, targetColumnId } =
+        action.payload;
+      const sourceListIndex = findItemIndexById(state.lists, sourceColumnId);
+      const targetListIndex = findItemIndexById(state.lists, targetColumnId);
+      const dragIndex = findItemIndexById(
+        state.lists[sourceListIndex].tasks,
+        draggedItemId
+      );
+      const hoverIndex = hoverItemId
+        ? findItemIndexById(state.lists[targetListIndex].tasks, hoverItemId!!)
+        : 0;
+      // state.lists = moveItem(state.lists, dragIndex, hoverIndex);
+      const item = state.lists[sourceListIndex].tasks[dragIndex];
+      // remove item from source list
+      state.lists[sourceListIndex].tasks.splice(dragIndex, 1);
+      // insert item into target list
+      state.lists[targetListIndex].tasks.splice(hoverIndex, 0, item);
+    },
     fetchTasksSuccess: (state, action: PayloadAction<List[]>) => {
       state.loading = false;
       state.lists = action.payload;
@@ -123,7 +149,8 @@ export const {
   fetchTasksError,
   fetchTasksSuccess,
   setActiveTask,
-  moveList
+  moveList,
+  moveTask,
 } = listSlice.actions;
 export const reducer = listSlice.reducer;
 export { reducer as listReducer };

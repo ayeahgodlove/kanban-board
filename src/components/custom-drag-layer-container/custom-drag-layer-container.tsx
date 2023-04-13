@@ -1,16 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { DragItem } from "../../models/drag/drag-item.model";
 import { useDragLayer } from "react-dnd";
 import { CustomDragContainerLayout } from "../layout/custom-drag-container/custom-drag-container.style";
 import { Column } from "../column/column.component";
 import { DragPreviewWrapper } from "../layout/drag-preview-container/drag-preview-container.style";
+import { useAppState } from "../../hook/app-state.hook";
+import { Card } from "../card/card.component";
 
 export const CustomDragLayer: React.FC = () => {
-  const draggedItem = useSelector<RootState, DragItem>(
-    (state) => state.draggedItem.draggedItem as DragItem
-  );
+  const { draggedItem } = useAppState();
   const { currentOffSet } = useDragLayer((monitor) => ({
     currentOffSet: monitor.getSourceClientOffset(),
   }));
@@ -18,7 +15,16 @@ export const CustomDragLayer: React.FC = () => {
   return draggedItem && currentOffSet ? (
     <CustomDragContainerLayout>
       <DragPreviewWrapper position={currentOffSet}>
-        <Column id={draggedItem.id} text={draggedItem.text} isPreview />
+        {draggedItem.type === "COLUMN" ? (
+          <Column id={draggedItem.id} text={draggedItem.text} isPreview />
+        ) : (
+          <Card
+            columnId={draggedItem.id}
+            text={draggedItem.text}
+            id={draggedItem.id}
+            isPreview
+          />
+        )}
       </DragPreviewWrapper>
     </CustomDragContainerLayout>
   ) : null;

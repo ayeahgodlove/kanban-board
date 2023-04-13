@@ -20,6 +20,10 @@ export const useDragItem = (item: DragItem) => {
     type: item.type, // type of item (CARD || COLUMN)
     item: () => {
       dispatch(setDraggedItem(item));
+      dispatch({
+        type: "SET_DRAGGED_ITEM",
+        payload: item
+      })
       return item;
     }, // retuns dragged item object and dispatches setDraggedItem action
     end: () => dispatch(setDraggedItem(null)), //called when drag is released
