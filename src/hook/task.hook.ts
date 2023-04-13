@@ -57,47 +57,12 @@ const useTask = () => {
       });
     }
   };
-  // const addTask = async (task: Task) => {
-  //   return await taskService
-  //     .create(task)
-  //     .then(async (taskResponse) => {
-  //       const data = await taskResponse.json();
-  //       dispatch(taskActions.setActiveTask(data));
-  //       return true;
-  //     })
-  //     .catch((error) => {
-  //       // dispatch(taskActions.)
-  //       return false;
-  //     });
-  // };
 
-  const setTask = (task: Task) => {
-    // dispatch(taskActions.setActiveTask(task));
-  };
-
-  // const editTask = async (task: Task) => {
-  //   return await taskService
-  //     .update(task)
-  //     .then(async (taskResponse) => {
-  //       const data = await taskResponse.json();
-  //       dispatch(taskActions.editTasksuccess(data));
-  //       setTask(data);
-  //       return true;
-  //     })
-  //     .catch((error) => {
-  //       return false;
-  //     });
-  // };
   const editTask = async (task: Task) => {};
-
-  // useEffect(() => {
-  //   loadTasks();
-  // }, [task, tasks, isLoading, loadTasks]);
 
   return {
     addTask,
     editTask,
-    setTask,
     foundTasks,
     getTaskByListId,
   };

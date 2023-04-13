@@ -14,23 +14,6 @@ const useList = () => {
 
   const dispatch = useDispatch();
 
-  // const loadLists = useCallback(() => {
-  //   return dispatch(listActions.fetchListsAsync() as any);
-  // }, [dispatch]);
-
-  // const addList = async (list: List) => {
-  //   return await listService
-  //     .create(list)
-  //     .then(async (listResponse) => {
-  //       const data = await listResponse.json();
-  //       dispatch(listActions.setActiveList(data));
-  //       return true;
-  //     })
-  //     .catch((error) => {
-  //       // dispatch(listActions.)
-  //       return false;
-  //     });
-  // };
   const addList = async (text: string) => {
     try {
       if (text.length > 0) {
@@ -55,25 +38,8 @@ const useList = () => {
   const setList = (list: List) => {
     dispatch(listActions.setActiveList(list));
   };
-
-  // const editList = async (list: List) => {
-  //   return await listService
-  //     .update(list)
-  //     .then(async (listResponse) => {
-  //       const data = await listResponse.json();
-  //       dispatch(listActions.editListsuccess(data));
-  //       setList(data);
-  //       return true;
-  //     })
-  //     .catch((error) => {
-  //       return false;
-  //     });
-  // };
+  
   const editList = async (list: List) => {};
-
-  // useEffect(() => {
-  //   loadLists();
-  // }, [list, lists, isLoading, loadLists]);
 
   return {
     list,
